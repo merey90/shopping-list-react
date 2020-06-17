@@ -8,6 +8,7 @@ export const NewItemForm = ({ newId, addNewItem }) => {
   };
 
   const handleSubmit = (event) => {
+    // ne daet otpravit formu po ssylke
     event.preventDefault();
 
     const newShoppingItem = {

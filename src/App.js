@@ -24,9 +24,9 @@ const App = () => {
   ]);
 
   const handleAddNewItem = (newShoppingItem) => {
+    // ... - spread operator, rasformirovyvaet massiv
     setShoppingList([...shoppingList, newShoppingItem]);
   };
-  console.log("shoppingList: ", shoppingList);
 
   return (
     <div className="App">

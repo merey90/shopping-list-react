@@ -1,7 +1,6 @@
 import React from "react";
 
 export const ShoppingList = ({ shoppingList }) => {
-  console.log("shoppingList: ", shoppingList);
   return (
     <ul>
       {shoppingList.map((shopping) => {
