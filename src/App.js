@@ -3,6 +3,7 @@ import React from "react";
 import "./App.css";
 import { ShoppingList } from "./ShoppingList";
 import { NewItemForm } from "./NewItemForm";
+import { Main } from "./Main";
 
 const App = () => {
   const [shoppingList, setShoppingList] = React.useState([
@@ -30,6 +31,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <Main />
       <ShoppingList shoppingList={shoppingList} />
       <hr />
       <NewItemForm newId={shoppingList.length} addNewItem={handleAddNewItem} />
