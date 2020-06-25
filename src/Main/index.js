@@ -11,7 +11,7 @@ export const Main = () => {
     },
     {
       id: 1,
-      title: "Apple2",
+      title: "Apple",
       done: false,
     },
     {
