@@ -21,16 +21,21 @@ export const Main = () => {
     },
   ]);
 
-  const handleAddNewItem = (newShoppingItem) => {
-    // ... - spread operator, rasformirovyvaet massiv
-    setShoppingList([...shoppingList, newShoppingItem]);
+  const handleAddNewItem = (newItemTitle) => {
+    const newItem = {
+      id: shoppingList.length,
+      title: newItemTitle,
+      done: false,
+    };
+
+    setShoppingList([...shoppingList, newItem]);
   };
 
   return (
     <main>
       <ShoppingList shoppingList={shoppingList} />
       <hr />
-      <NewItemForm newId={shoppingList.length} addNewItem={handleAddNewItem} />
+      <NewItemForm addNewItem={handleAddNewItem} />
     </main>
   );
 };

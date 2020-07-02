@@ -1,35 +1,29 @@
-import React from "react";
+import React from 'react';
 
-export const NewItemForm = ({ newId, addNewItem }) => {
-  const [newItem, setNewItem] = React.useState("");
+export const NewItemForm = ({ addNewItem }) => {
+  const [itemTitle, setItemTitle] = React.useState('');
 
-  const handleChange = (event) => {
-    setNewItem(event.target.value);
+  const handleChange = ({ target }) => {
+    setItemTitle(target.value);
   };
 
   const handleSubmit = (event) => {
-    // ne daet otpravit formu po ssylke
     event.preventDefault();
-
-    const newShoppingItem = {
-      id: newId,
-      title: newItem,
-      done: false,
-    };
-
-    addNewItem(newShoppingItem);
-
-    setNewItem("");
+    addNewItem(itemTitle);
+    setItemTitle('');
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      method="get"
+      action="https://bakhti.com/api/addnewitem"
+    >
       <input
         type="text"
         placeholder="New item"
-        name="newItem"
-        value={newItem}
         onChange={handleChange}
+        value={itemTitle}
       />
       <button type="submit">Add</button>
     </form>
