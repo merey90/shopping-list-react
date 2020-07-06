@@ -1,22 +1,22 @@
-import React from "react";
-import { ShoppingList } from "../ShoppingList";
-import { NewItemForm } from "../NewItemForm";
+import React from 'react';
+import { ShoppingList } from '../ShoppingList';
+import { NewItemForm } from '../NewItemForm';
 
 export const Main = () => {
   const [shoppingList, setShoppingList] = React.useState([
     {
       id: 0,
-      title: "Banana",
+      title: 'Banana',
       done: true,
     },
     {
       id: 1,
-      title: "Apple",
+      title: 'Apple',
       done: false,
     },
     {
       id: 2,
-      title: "Milk",
+      title: 'Milk',
       done: false,
     },
   ]);
@@ -31,9 +31,16 @@ export const Main = () => {
     setShoppingList([...shoppingList, newItem]);
   };
 
+  const handleChangeItem = (id) => {
+    const item = shoppingList.find((shopping) => shopping.id === id);
+    item.done = !item.done;
+
+    console.log(item);
+  };
+
   return (
     <main>
-      <ShoppingList shoppingList={shoppingList} />
+      <ShoppingList shoppingList={shoppingList} changeItem={handleChangeItem} />
       <hr />
       <NewItemForm addNewItem={handleAddNewItem} />
     </main>

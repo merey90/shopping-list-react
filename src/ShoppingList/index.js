@@ -1,19 +1,26 @@
-import React from "react";
+import React from 'react';
+import { FormControlLabel, Checkbox } from '@material-ui/core';
 
-export const ShoppingList = ({ shoppingList }) => {
+export const ShoppingList = ({ shoppingList, changeItem }) => {
+  const handleChange = (id) => {
+    changeItem(id);
+  };
+
   return (
     <ul>
       {shoppingList.map((shopping) => {
         return (
           <li key={shopping.id}>
-            <label>
-              <input
-                type="checkbox"
-                value={shopping.id}
-                checked={shopping.done}
-              />
-              {shopping.title}
-            </label>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={shopping.done}
+                  onChange={() => handleChange(shopping.id)}
+                  color="primary"
+                />
+              }
+              label={shopping.title}
+            />
           </li>
         );
       })}
