@@ -1,4 +1,8 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import TextField from '@material-ui/core/TextField';
+import { Box } from '@material-ui/core';
 
 export const NewItemForm = ({ addNewItem }) => {
   const [itemTitle, setItemTitle] = React.useState('');
@@ -9,7 +13,9 @@ export const NewItemForm = ({ addNewItem }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addNewItem(itemTitle);
+    // pustye stroki i probely ne dobavlyaem
+    if (!itemTitle.trim()) return;
+    addNewItem(itemTitle.trim());
     setItemTitle('');
   };
 
@@ -19,13 +25,17 @@ export const NewItemForm = ({ addNewItem }) => {
       method="get"
       action="https://bakhti.com/api/addnewitem"
     >
-      <input
-        type="text"
-        placeholder="New item"
-        onChange={handleChange}
-        value={itemTitle}
-      />
-      <button type="submit">Add</button>
+      <Box display="flex" mt={2}>
+        <TextField label="New item" onChange={handleChange} value={itemTitle} />
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          startIcon={<AddCircleIcon />}
+        >
+          Add
+        </Button>
+      </Box>
     </form>
   );
 };
