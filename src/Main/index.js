@@ -1,8 +1,10 @@
 import React from 'react';
 import { ShoppingList } from '../ShoppingList';
 import { NewItemForm } from '../NewItemForm';
+import { Filtering } from '../Filtering';
 
 export const Main = () => {
+  const [showAll, setShowAll] = React.useState(false);
   const [shoppingList, setShoppingList] = React.useState([
     {
       id: 0,
@@ -32,15 +34,20 @@ export const Main = () => {
   };
 
   const handleChangeItem = (id) => {
-    const item = shoppingList.find((shopping) => shopping.id === id);
+    const newShoppingList = [...shoppingList];
+    const item = newShoppingList.find((shopping) => shopping.id === id);
     item.done = !item.done;
-
-    console.log(item);
+    setShoppingList(newShoppingList);
   };
 
   return (
     <main>
-      <ShoppingList shoppingList={shoppingList} changeItem={handleChangeItem} />
+      <Filtering showAll={showAll} setShowAll={setShowAll} />
+      <ShoppingList
+        showAll={showAll}
+        shoppingList={shoppingList}
+        changeItem={handleChangeItem}
+      />
       <hr />
       <NewItemForm addNewItem={handleAddNewItem} />
     </main>

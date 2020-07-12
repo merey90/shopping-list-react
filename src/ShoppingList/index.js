@@ -1,14 +1,20 @@
 import React from 'react';
 import { FormControlLabel, Checkbox } from '@material-ui/core';
 
-export const ShoppingList = ({ shoppingList, changeItem }) => {
+import './styles.css';
+
+export const ShoppingList = ({ showAll, shoppingList, changeItem }) => {
   const handleChange = (id) => {
     changeItem(id);
   };
 
   return (
-    <ul>
+    <ul className="shopping-list">
       {shoppingList.map((shopping) => {
+        if (!showAll && shopping.done) {
+          return null;
+        }
+
         return (
           <li key={shopping.id}>
             <FormControlLabel
