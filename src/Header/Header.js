@@ -1,17 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Button,
+  Box,
+} from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 
 export const Header = () => (
-  <header>
-    <nav>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/about">About</Link>
-        </li>
-      </ul>
-    </nav>
-  </header>
+  <AppBar position="static">
+    <Toolbar>
+      <IconButton edge="start" color="inherit" aria-label="menu">
+        <MenuIcon />
+      </IconButton>
+      <Typography component={Link} variant="h6" to="/">
+        Shopping List
+      </Typography>
+      <Box display="flex" justifyContent="flex-end" flexGrow="1">
+        <Button component={Link} color="secondary" to="/">
+          Home
+        </Button>
+        <Button component={Link} color="secondary" to="/about">
+          About
+        </Button>
+      </Box>
+    </Toolbar>
+  </AppBar>
 );
