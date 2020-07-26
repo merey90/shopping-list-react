@@ -1,9 +1,10 @@
 import React from 'react';
+
 import { ShoppingList } from '../ShoppingList';
 import { NewItemForm } from '../NewItemForm';
 import { Filtering } from '../Filtering';
 
-export const Main = () => {
+export const Shopping = () => {
   const [showAll, setShowAll] = React.useState(false);
   const [shoppingList, setShoppingList] = React.useState([
     {
