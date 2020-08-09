@@ -1,8 +1,10 @@
 import React from 'react';
-import { List, ListItem } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Box, Paper, Tabs, Tab } from '@material-ui/core';
+import { Link, useLocation } from 'react-router-dom';
 
 export const Users = () => {
+  const { pathname } = useLocation();
+  const tab = pathname.slice(1) || false;
   let [users, setUsers] = React.useState([]);
 
   React.useEffect(() => {
@@ -20,15 +22,22 @@ export const Users = () => {
   if (!users.length) return <h1>Loading...</h1>;
 
   return (
-    <>
-      <h1>Users</h1>
-      <List>
-        {users.map((user) => (
-          <ListItem component={Link} to={`/users/${user._id}`} key={user._id}>
-            {user.name} {user.surname}
-          </ListItem>
-        ))}
-      </List>
-    </>
+    <Box display="flex" flexDirection="column" mr={3}>
+      <Paper>
+        <Box p={2}>
+          <Tabs orientation="vertical" value={tab}>
+            {users.map((user) => (
+              <Tab
+                component={Link}
+                to={`/${user._id}`}
+                key={user._id}
+                value={user._id}
+                label={`${user.name} ${user.surname}`}
+              />
+            ))}
+          </Tabs>
+        </Box>
+      </Paper>
+    </Box>
   );
 };

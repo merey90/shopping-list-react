@@ -16,12 +16,12 @@ export const ShoppingList = ({ showAll, shoppingList, changeItem }) => {
         }
 
         return (
-          <li key={shopping.id}>
+          <li key={shopping._id}>
             <FormControlLabel
               control={
                 <Checkbox
                   checked={shopping.done}
-                  onChange={() => handleChange(shopping.id)}
+                  onChange={() => handleChange(shopping._id)}
                   color="primary"
                 />
               }

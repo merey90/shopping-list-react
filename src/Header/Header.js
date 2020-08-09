@@ -13,14 +13,11 @@ export const Header = () => (
           className="header-title"
           component={Link}
           variant="h6"
-          to="/users"
+          to="/"
         >
           Shopping List
         </Typography>
-        <Box display="flex" justifyContent="flex-end" flexGrow="1">
-          <Button component={Link} color="inherit" to="/users">
-            Users
-          </Button>
+        <Box display="flex" justifyContent="flex-end" flexGrow={1}>
           <Button component={Link} color="inherit" to="/about">
             About
           </Button>
