@@ -31,7 +31,7 @@ export const Shopping = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ title: newItemTitle }), // body data type must match "Content-Type" header
+        body: JSON.stringify({ title: newItemTitle }),
       }
     );
     const shoppingItemData = await response.json();
@@ -49,7 +49,7 @@ export const Shopping = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ done: !item.done }), // body data type must match "Content-Type" header
+        body: JSON.stringify({ done: !item.done }),
       }
     );
     const shoppingItemData = await response.json();
