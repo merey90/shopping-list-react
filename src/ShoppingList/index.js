@@ -1,11 +1,12 @@
 import React from 'react';
 import {
-  FormControlLabel,
   Checkbox,
   List,
   ListItem,
   ListItemSecondaryAction,
   IconButton,
+  ListItemIcon,
+  ListItemText,
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 
@@ -24,17 +25,15 @@ export const ShoppingList = ({
       }
 
       return (
-        <ListItem dense key={shopping._id}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={shopping.done}
-                onChange={() => changeItem(shopping._id)}
-                color="primary"
-              />
-            }
-            label={shopping.title}
-          />
+        <ListItem
+          dense
+          key={shopping._id}
+          onClick={() => changeItem(shopping._id)}
+        >
+          <ListItemIcon>
+            <Checkbox edge="start" checked={shopping.done} disableRipple />
+          </ListItemIcon>
+          <ListItemText primary={shopping.title} />
           <ListItemSecondaryAction>
             <IconButton
               edge="end"
