@@ -11,33 +11,51 @@ export const Shopping = () => {
   const [showAll, setShowAll] = React.useState(false);
   const [shoppingList, setShoppingList] = React.useState([]);
 
-  React.useEffect(() => {
-    const fetchUser = async () => {
-      const response = await fetch(
-        `https://merey-todo-list.herokuapp.com/api/users/${userId}/todos`
-      );
-      const shoppingListData = await response.json();
-      setShoppingList(shoppingListData);
-    };
-
-    fetchUser();
+  const fetchUser = React.useCallback(async () => {
+    const response = await fetch(
+      `https://merey-todo-list.herokuapp.com/api/users/${userId}/todos`
+    );
+    const shoppingListData = await response.json();
+    setShoppingList(shoppingListData);
   }, [userId]);
 
-  const handleAddNewItem = (newItemTitle) => {
-    const newItem = {
-      _id: shoppingList.length,
-      title: newItemTitle,
-      done: false,
-    };
+  React.useEffect(() => {
+    fetchUser();
+  }, [fetchUser]);
 
-    setShoppingList([...shoppingList, newItem]);
+  const handleAddNewItem = async (newItemTitle) => {
+    const response = await fetch(
+      `https://merey-todo-list.herokuapp.com/api/todos/${userId}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title: newItemTitle }),
+      }
+    );
+    const shoppingItemData = await response.json();
+    if (!shoppingItemData.taskId)
+      alert("New item wasn't added to the Database");
+    else fetchUser();
   };
 
-  const handleChangeItem = (id) => {
-    const newShoppingList = [...shoppingList];
-    const item = newShoppingList.find((shopping) => shopping._id === id);
-    item.done = !item.done;
-    setShoppingList(newShoppingList);
+  const handleChangeItem = async (id) => {
+    const item = shoppingList.find((shopping) => shopping._id === id);
+    const response = await fetch(
+      `https://merey-todo-list.herokuapp.com/api/todos/${id}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ done: !item.done }),
+      }
+    );
+    const shoppingItemData = await response.json();
+    if (!shoppingItemData.taskId)
+      alert("Item property wasn't changed on the Database");
+    else fetchUser();
   };
 
   return (
