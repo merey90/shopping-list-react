@@ -58,6 +58,22 @@ export const Shopping = () => {
     else fetchUser();
   };
 
+  const handleDeleteItem = async (id) => {
+    const response = await fetch(
+      `https://merey-todo-list.herokuapp.com/api/todos/${id}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    const shoppingItemData = await response.json();
+    if (!shoppingItemData.taskId)
+      alert('Item property was deleted on the Database');
+    else fetchUser();
+  };
+
   return (
     <Paper>
       <Box p={2}>
@@ -68,6 +84,7 @@ export const Shopping = () => {
               showAll={showAll}
               shoppingList={shoppingList}
               changeItem={handleChangeItem}
+              deleteItem={handleDeleteItem}
             />
             <hr />
           </>

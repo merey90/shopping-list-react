@@ -1,35 +1,50 @@
 import React from 'react';
-import { FormControlLabel, Checkbox } from '@material-ui/core';
+import {
+  Checkbox,
+  List,
+  ListItem,
+  ListItemSecondaryAction,
+  IconButton,
+  ListItemIcon,
+  ListItemText,
+} from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import './styles.css';
 
-export const ShoppingList = ({ showAll, shoppingList, changeItem }) => {
-  const handleChange = (id) => {
-    changeItem(id);
-  };
+export const ShoppingList = ({
+  showAll,
+  shoppingList,
+  changeItem,
+  deleteItem,
+}) => (
+  <List>
+    {shoppingList.map((shopping) => {
+      if (!showAll && shopping.done) {
+        return null;
+      }
 
-  return (
-    <ul className="shopping-list">
-      {shoppingList.map((shopping) => {
-        if (!showAll && shopping.done) {
-          return null;
-        }
-
-        return (
-          <li key={shopping._id}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={shopping.done}
-                  onChange={() => handleChange(shopping._id)}
-                  color="primary"
-                />
-              }
-              label={shopping.title}
-            />
-          </li>
-        );
-      })}
-    </ul>
-  );
-};
+      return (
+        <ListItem
+          dense
+          key={shopping._id}
+          onClick={() => changeItem(shopping._id)}
+        >
+          <ListItemIcon>
+            <Checkbox edge="start" checked={shopping.done} disableRipple />
+          </ListItemIcon>
+          <ListItemText primary={shopping.title} />
+          <ListItemSecondaryAction>
+            <IconButton
+              edge="end"
+              aria-label="delete"
+              onClick={() => deleteItem(shopping._id)}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </ListItemSecondaryAction>
+        </ListItem>
+      );
+    })}
+  </List>
+);
